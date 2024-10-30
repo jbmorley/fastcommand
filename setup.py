@@ -20,11 +20,25 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import os
+import subprocess
+
 from setuptools import setup, find_packages
+
+
+ROOT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
+CHANGES_DIRECTORY = os.path.join(ROOT_DIRECTORY, "scripts", "changes")
+
+CHANGES_PATH = os.path.join(CHANGES_DIRECTORY, "changes")
+
+
+# Use changes to determine the package version.
+version = subprocess.check_output(["changes", "version"]).decode("utf-8").strip()
+
 
 setup(
     name='quickcli',
-    version='0.1',
+    version=version,
     packages=find_packages(),
     install_requires=[]
 )
