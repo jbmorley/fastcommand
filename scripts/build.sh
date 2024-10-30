@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/bin/bash
 
 # Copyright (c) 2021-2024 Jason Morley
 #
@@ -20,9 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import os
 
-from setuptools import setup
-
-
-setup(version=os.environ["VERSION"] if "VERSION" in os.environ else "0.0.0")
+export VERSION=$(scripts/changes/changes version)
+python -m build

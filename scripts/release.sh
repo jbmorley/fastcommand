@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/bin/bash
 
 # Copyright (c) 2021-2024 Jason Morley
 #
@@ -20,9 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import os
+SCRIPTS_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+ROOT_DIRECTORY="$SCRIPTS_DIRECTORY/.."
+CHANGES_SCRIPT="$SCRIPTS_DIRECTORY/changes/changes"
+RELEASE_SCRIPT="$SCRIPTS_DIRECTORY/changes/examples/gh-release.sh"
 
-from setuptools import setup
-
-
-setup(version=os.environ["VERSION"] if "VERSION" in os.environ else "0.0.0")
+"$CHANGES_SCRIPT" --verbose release --skip-if-empty --push --command "\"$RELEASE_SCRIPT\"" "\"$@\""
