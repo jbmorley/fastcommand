@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Copyright (c) 2021-2024 Jason Morley
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -18,39 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-name: test
+SCRIPTS_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+ROOT_DIRECTORY="${SCRIPTS_DIRECTORY}/.."
+CHANGES_SCRIPT="${ROOT_DIRECTORY}/changes"
+RELEASE_SCRIPT="${ROOT_DIRECTORY}/examples/gh-release.sh"
 
-on:
-  pull_request:
-    branches: [ main ]
-  push:
-    branches: [ main ]
-  schedule:
-    - cron:  '0 9 * * *'
-  workflow_dispatch:
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        submodules: recursive
-        fetch-depth: 0
-
-    - name: Install Python dependencies
-      run: |
-        python -m pip install --upgrade pipenv wheel build
-        PIPENV_PIPFILE=scripts/changes/Pipfile pipenv install
-
-    - name: Build the package
-      run: scripts/build.sh
-
-    - name: Create release
-      run: scripts/release.sh
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # if: ${{ github.ref == 'refs/heads/main' }}
+"${CHANGES_SCRIPT}" --verbose release --skip-if-empty --push --command "\"${RELEASE_SCRIPT}\"" "\"$@\""
