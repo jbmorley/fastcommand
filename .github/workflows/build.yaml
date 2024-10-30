@@ -46,7 +46,7 @@ jobs:
     - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pipenv wheel build
-        pipenv install
+        PIPENV_PIPFILE=scripts/changes/Pipfile pipenv install
 
     - name: Build the package
       run: scripts/build.sh

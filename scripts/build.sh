@@ -1,4 +1,4 @@
 #!/bin/bash
 
-export VERSION=$(changes version)
+export VERSION=$(scripts/changes/changes version)
 python -m build
