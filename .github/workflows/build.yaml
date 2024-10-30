@@ -66,7 +66,7 @@ jobs:
       if: ${{ github.ref == 'refs/heads/main' }}
 
   publish-to-pypi:
-    if: ${{ (github.ref == 'refs/heads/main') && (needs.build.outputs.build.needs_release) }}
+    if: ${{ (github.ref == 'refs/heads/main') && (needs.build.outputs.needs_release) }}
     needs:
     - build
     runs-on: ubuntu-latest
