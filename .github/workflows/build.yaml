@@ -50,6 +50,12 @@ jobs:
     - name: Build the package
       run: scripts/build.sh
 
+    - name: Store the distribution packages
+      uses: actions/upload-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+
     - name: Create release
       run: scripts/release.sh
       env:
