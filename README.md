@@ -21,5 +21,8 @@ def main():
     cli = quickcli.CommandParser(description="Simple quickcli example.")
     cli.use_logging(format="[%(levelname)s] %(message)s")
     cli.run()
-```
 
+
+if __name__ == "__main__":
+    main()
+```
