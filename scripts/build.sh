@@ -20,6 +20,32 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+set -e
+set -o pipefail
+set -x
+set -u
 
-export VERSION=$(scripts/changes/changes version)
+SCRIPTS_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+ROOT_DIRECTORY="$SCRIPTS_DIRECTORY/.."
+CHANGES_DIRECTORY="$SCRIPTS_DIRECTORY/changes"
+
+# Configure the path.
+PATH=$PATH:"$CHANGES_DIRECTORY"
+
+# Write outputs to /dev/null if we're not running under GitHub Actions.
+GITHUB_OUTPUT="${GITHUB_OUTPUT:-/dev/null}"
+
+# Determine the version.
+export VERSION=$(changes version)
+export RELEASED_VERSION=$(changes version --released)
+
+# Build the package.
 python -m build
+
+# Check if the package needs a release and report it to GitHub Actions.
+if [[ "$VERSION" == "$RELEASED_VERSION" ]]; then
+    echo "needs_release=false" >> "$GITHUB_OUTPUT"
+else
+    echo "needs_release=true" >> "$GITHUB_OUTPUT"
+fi
