@@ -25,4 +25,6 @@ ROOT_DIRECTORY="$SCRIPTS_DIRECTORY/.."
 CHANGES_SCRIPT="$SCRIPTS_DIRECTORY/changes/changes"
 RELEASE_SCRIPT="$SCRIPTS_DIRECTORY/changes/examples/gh-release.sh"
 
-"$CHANGES_SCRIPT" --verbose release --skip-if-empty --push --command "\"$RELEASE_SCRIPT\"" "\"$@\""
+WHEEL=`ls dist/quickcli-*.whl`
+
+"$CHANGES_SCRIPT" --verbose release --skip-if-empty --push --exec "$RELEASE_SCRIPT" "$WHEEL"
