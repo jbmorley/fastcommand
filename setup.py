@@ -25,6 +25,4 @@ import os
 from setuptools import setup
 
 
-version = os.environ["VERSION"] if "VERSION" in os.environ else "0.0.0"
-
-setup(version=version)
+setup(version=os.environ["VERSION"] if "VERSION" in os.environ else "0.0.0")
