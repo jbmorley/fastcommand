@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 
-import quickcli
+import fastcommand
 
 
-@quickcli.command("hello", help="say hello")
+@fastcommand.command("hello", help="say hello")
 def command_hello(options):
     print("Hello, World!")
 
 
 def main():
-    cli = quickcli.CommandParser(description="Simple quickcli example.")
+    cli = fastcommand.CommandParser(description="Simple fastcommand example.")
     cli.use_logging(format="[%(levelname)s] %(message)s")
     cli.run()
 
