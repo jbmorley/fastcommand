@@ -5,6 +5,7 @@ build-backend = "setuptools.build_meta:__legacy__"
 [project]
 name = "quickcli"
 readme = "README.md"
+license = {file = "LICENSE"}
 authors = [
   {name = "Jason Morley", email = "hello@jbmorley.co.uk"}
 ]
