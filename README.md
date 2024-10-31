@@ -1,5 +1,7 @@
 # fastcommand
 
+[![build](https://github.com/jbmorley/fastcommand/actions/workflows/build.yaml/badge.svg)](https://github.com/jbmorley/fastcommand/actions/workflows/build.yaml)
+
 Python module for defining multi-command cli programs
 
 ## Description
