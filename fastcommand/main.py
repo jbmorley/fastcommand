@@ -25,6 +25,8 @@ import functools
 import logging
 import sys
 
+import argcomplete
+
 
 COMMANDS = {}
 
@@ -83,6 +85,7 @@ class CommandParser(object):
                                  help="show verbose output")
 
     def run(self):
+        argcomplete.autocomplete(self.parser)
         options = self.parser.parse_args()
         if 'fn' not in options:
             logging.error("No command specified.")
