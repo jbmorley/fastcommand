@@ -9,5 +9,5 @@ license = {file = "LICENSE"}
 authors = [
   {name = "Jason Morley", email = "hello@jbmorley.co.uk"}
 ]
-dependencies = []
+dependencies = ["argcomplete"]
 dynamic = ["version"]
