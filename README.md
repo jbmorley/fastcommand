@@ -10,6 +10,8 @@ The `fastcommand` module is a lightweight wrapper over `argparse` which aims to 
 
 ## Usage
 
+### Example
+
 ```python
 import fastcommand
 
@@ -38,3 +40,33 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+
+### Autocomplete
+
+`fastcommand` provides autocomplete using `argcomplete`. Enable it by adding the following the `argcomplete` marker to the to of your application:
+
+```python
+# PYTHON_ARGCOMPLETE_OK
+```
+
+Install `argcomplete` locally to be able to use autocomplete:
+
+```sh
+pip install argcomplete
+```
+
+And then either:
+
+- activate globally by running:
+
+  ```sh
+  activate-global-python-argcomplete
+  ```
+
+- activate it for a specific command by running:
+
+  ```sh
+  eval "$(register-python-argcomplete my-python-app)"
+  ```
+
+See the [`argcomplete` documentation](`argcomplete`](https://pypi.org/project/argcomplete/)) for more details.
