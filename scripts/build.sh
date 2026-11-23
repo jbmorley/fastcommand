@@ -28,10 +28,6 @@ set -u
 SCRIPTS_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 ROOT_DIRECTORY="$SCRIPTS_DIRECTORY/.."
-CHANGES_DIRECTORY="$SCRIPTS_DIRECTORY/changes"
-
-# Configure the path.
-PATH=$PATH:"$CHANGES_DIRECTORY"
 
 # Write outputs to /dev/null if we're not running under GitHub Actions.
 GITHUB_OUTPUT="${GITHUB_OUTPUT:-/dev/null}"
