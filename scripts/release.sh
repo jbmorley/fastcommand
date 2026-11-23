@@ -22,9 +22,10 @@
 
 SCRIPTS_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 ROOT_DIRECTORY="$SCRIPTS_DIRECTORY/.."
-CHANGES_SCRIPT="$SCRIPTS_DIRECTORY/changes/changes"
 RELEASE_SCRIPT="$SCRIPTS_DIRECTORY/changes/examples/gh-release.sh"
+
+cd "$ROOT_DIRECTORY"
 
 WHEEL=`ls dist/fastcommand-*.whl`
 
-"$CHANGES_SCRIPT" --verbose release --skip-if-empty --push --exec "$RELEASE_SCRIPT" "$WHEEL"
+changes --verbose release --skip-if-empty --push --exec "$RELEASE_SCRIPT" "$WHEEL"
