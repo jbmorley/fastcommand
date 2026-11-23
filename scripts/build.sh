@@ -28,20 +28,23 @@ set -u
 SCRIPTS_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 ROOT_DIRECTORY="$SCRIPTS_DIRECTORY/.."
-CHANGES_DIRECTORY="$SCRIPTS_DIRECTORY/changes"
-
-# Configure the path.
-PATH=$PATH:"$CHANGES_DIRECTORY"
+BUILD_DIRECTORY="$ROOT_DIRECTORY/dist"
 
 # Write outputs to /dev/null if we're not running under GitHub Actions.
 GITHUB_OUTPUT="${GITHUB_OUTPUT:-/dev/null}"
+
+# Clean up and recreate the output directories.
+if [ -d "$BUILD_DIRECTORY" ] ; then
+    rm -r "$BUILD_DIRECTORY"
+fi
+mkdir -p "$BUILD_DIRECTORY"
 
 # Determine the version.
 export VERSION=$(changes version)
 export RELEASED_VERSION=$(changes version --released)
 
 # Build the package.
-python -m build
+pyproject-build -o "$BUILD_DIRECTORY"
 
 # Check if the package needs a release and report it to GitHub Actions.
 if [[ "$VERSION" == "$RELEASED_VERSION" ]]; then
